@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\CloseContact\CloseContact;
 use App\Models\Member;
 use App\Models\Loan;
 use App\Models\Patient\Patient;
@@ -21,6 +22,7 @@ class HomeController extends Controller
 
 		$totalAdmin = User::count();
 		$totalPasien = Patient::count();
+		$totalKontakErat = CloseContact::count();
 		$pasienPerMonth = $patientService->getPerMonth();
 		$pasienGender = $patientService->getGender();
 		$pasienAge = $patientService->getAge();
@@ -32,6 +34,6 @@ class HomeController extends Controller
 		// $loanPerMonth = $loanService->gerPerMonth();
 		// $topBook = $loanService->getTopBook();
 
-		return view('home', compact('totalAdmin', 'totalPasien', 'pasienPerMonth', 'pasienGender', 'pasienAge'));
+		return view('home', compact('totalAdmin', 'totalPasien', 'pasienPerMonth', 'pasienGender', 'pasienAge', 'totalKontakErat'));
 	}
 }

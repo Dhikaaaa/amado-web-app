@@ -16,14 +16,14 @@ class CreateCloseContactsTable extends Migration
         Schema::create('close_contacts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('patient_id')->unsigned();
-            $table->text('address');
-            $table->string('name');
-            $table->string('relationship');
-            $table->string('duration');
-            $table->string('time');
-            $table->date('date');
-            $table->string('longitude');
-            $table->string('longitude');
+            $table->text('address')->nullable();
+            $table->string('name')->nullable();
+            $table->string('relationship')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('time')->nullable();
+            $table->date('date')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
 
             // Relationship
             $table->foreign('patient_id')->references('id')->on('patients')->cascadeOnDelete();

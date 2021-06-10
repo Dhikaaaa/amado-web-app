@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CloseContact\CloseContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Patient\PatientAuthApiController;
 use App\Http\Controllers\Api\Patient\ApiForgotPasswordController;
@@ -97,6 +98,7 @@ Route::prefix('patient')->group(function () {
          * * Route mengisi kontak erat
          */
         Route::prefix('kontak')->group(function () {
+            Route::post('/insert', [CloseContactController::class, 'storeCloseContact']);
         });
     });
 });
