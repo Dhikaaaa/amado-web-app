@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Patient\ApiForgotPasswordController;
 use App\Http\Controllers\Api\Patient\PatientProfileController;
 use App\Http\Controllers\Api\Patient\PatientDeviceController;
 use App\Http\Controllers\Api\Device\PulseOximetryController;
+use App\Http\Controllers\Api\Monitoring\MonitoringController;
 use App\Http\Controllers\Api\Notification\NotificationPatientController;
 
 /*
@@ -99,6 +100,14 @@ Route::prefix('patient')->group(function () {
          */
         Route::prefix('kontak')->group(function () {
             Route::post('/insert', [CloseContactController::class, 'storeCloseContact']);
+        });
+
+
+        /**
+         * ! This is just test route
+         */
+        Route::prefix('/monitoring')->group(function () {
+            Route::put('/update', [MonitoringController::class, 'testUpdateTotalMonitoring']);
         });
     });
 });

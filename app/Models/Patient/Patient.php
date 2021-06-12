@@ -7,6 +7,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Model;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Device\UserDevice;
+use App\Models\Monitoring\Monitoring;
 use App\Models\Notification\Notification;
 use App\Models\Notification\NotificationTemplate;
 use Illuminate\Contracts\Auth\CanResetPassword;
@@ -51,5 +52,14 @@ class Patient extends Model implements CanResetPassword
     public function closeContacts()
     {
         return $this->hasMany(CloseContact::class);
+    }
+
+
+    /**
+     * * Patient has one monitoring
+     */
+    public function monitoring()
+    {
+        return $this->hasOne(Monitoring::class);
     }
 }
