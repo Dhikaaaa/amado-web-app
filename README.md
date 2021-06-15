@@ -73,6 +73,8 @@ Hardware yang terintegrasi ini bertugas untuk mendapatkan data saturasi oksigen 
     -   [Isi form kontak erat](#kontak_form)
         -   [Insert](#kontak_erat_insert)
 -   [Geolokasi](#geolokasi)
+    -   [Update Patient Location](#patient_location)
+        -   [Update](#p_location_update)
 -   [Monitoring](#m_monitoring)
 -   [Rekam Medis](#rekam_medis)
 
@@ -877,6 +879,44 @@ Response :
 <!-- ============= MONITORING END ============= -->
 
 
+
+<!-- ============= GEOLOCATION START ================ -->
+# <a name="geolokasi"></a>Geolokasi
+## <a name="patient_location"></a>Update Patient Location
+### <a name="p_location_update"></a>Update
+Request:
+-   Method: POST
+-   Endpoint: 'patient/geo-update'
+-   Header:
+    -   Content-Type: application/json
+    -   Authorization: Bearer
+-   Body:
+```json
+{
+    "latitude": "8,1232732293",
+    "longitude": "-14458029463"
+}
+```
+
+Response:
+-   Success:
+```json
+{
+    "code": 200,
+    "message": "success",
+    "latitude": "8,1232732293",
+    "longitude": "-14458029463"
+}
+```
+-   Failed:
+```json
+{
+    "code": 200,
+    "status": "failed",
+    "message": "update location failed"
+}
+```
+<!-- ============= GEOLOCATION END ================ -->
 
 
 <!-- ============= DEVICE START ============= -->

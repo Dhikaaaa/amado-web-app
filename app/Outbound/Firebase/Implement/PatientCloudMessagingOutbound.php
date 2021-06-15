@@ -5,23 +5,19 @@ namespace App\Outbound\Firebase\Implement;
 use App\Models\Notification\NotificationTemplate;
 use App\Outbound\Firebase\CloudMessaging;
 use App\Repositories\UserRepository\Implement\PatientRepository;
-use App\Services\NotificationService\Implement\PatientNotificationService;
 use Illuminate\Support\Facades\Log;
 
 class PatientCloudMessagingOutbound implements CloudMessaging
 {
 
-    protected PatientNotificationService $patientNotificationService;
     protected PatientRepository $patientRepository;
     protected NotificationTemplate $notificaionTemplate;
 
 
     public function __construct(
-        PatientNotificationService $notification,
         PatientRepository $patientRepository,
         NotificationTemplate $notifTemplate
     ) {
-        $this->patientNotificationService = $notification;
         $this->patientRepository = $patientRepository;
         $this->notificaionTemplate = $notifTemplate;
     }

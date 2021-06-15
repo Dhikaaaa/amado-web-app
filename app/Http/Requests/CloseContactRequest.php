@@ -25,8 +25,8 @@ class CloseContactRequest extends FormRequest
     {
         return [
             'address' => 'required',
-            'name' => 'required',
-            'relationship' => 'required',
+            'name' => '',
+            'relationship' => '',
             'duration' => 'required',
             'time' => 'required',
             'date' => 'required',

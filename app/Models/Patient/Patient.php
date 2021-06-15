@@ -26,6 +26,8 @@ class Patient extends Model implements CanResetPassword
         'photo',
         'jenis_kelamin',
         'tanggal_lahir',
+        'latitude',
+        'longitude',
         'alamat'
     ];
 

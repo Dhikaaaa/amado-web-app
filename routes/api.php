@@ -37,7 +37,6 @@ Route::prefix('patient')->group(function () {
     Route::post('/forgot-password', [ApiForgotPasswordController::class, 'forgotPassword']);
     Route::post('/reset-password', [ApiForgotPasswordController::class, 'resetPassword']);
 
-
     /**
      * * Route get biodata Pasien
      */
@@ -53,6 +52,8 @@ Route::prefix('patient')->group(function () {
          * * Route biodata pasien
          */
         Route::post('/update', [PatientProfileController::class, 'update']);
+        // ! update geolokasi sementara
+        Route::post('/geo-update', [PatientProfileController::class, 'updatePatientLocation']);
 
         // TODO : Perlu perbaikan, data terlalu besar belum dioptimalkan
         Route::post('/add-profile-photo', [PatientProfileController::class, 'saveUserProfile']);
