@@ -9,4 +9,5 @@ interface DeviceRepository
     function saveDevice($patientId, $serialNumber): UserDevice;
     function updateDevice();
     function deleteDevice();
+    function getSerialNumber($patient_id);
 }

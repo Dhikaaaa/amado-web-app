@@ -2,7 +2,7 @@
 
 namespace App\Repositories\MonitoringRepository\Implement;
 
-use App\Models\Monitoring\Monitoring;
+
 use App\Models\Patient\Patient;
 use App\Repositories\MonitoringRepository\MonitoringRepository;
 use Illuminate\Support\Facades\Log;

@@ -27,7 +27,7 @@ class PulseOximetryController extends Controller
     public function getDataSensor(Request $request)
     {
 
-        $data = $this->oximetryService->getSensorData($request);
+        $data = $this->oximetryService->getSensorData($request->serial_number);
         if ($data !== EXIST) {
             return response()->json([
                 'code' => 200,

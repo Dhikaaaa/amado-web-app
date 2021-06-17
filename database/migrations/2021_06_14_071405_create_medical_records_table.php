@@ -17,9 +17,11 @@ class CreateMedicalRecordsTable extends Migration
             $table->id();
             $table->bigInteger('patient_id')->unsigned();
             $table->string('averrage_spo2')->nullable();
-            $table->string('averrage_bpm')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
+            $table->string('recomendation')->nullable();
 
+            // relation
+            $table->foreign('patient_id')->references('id')->on('patients')->cascadeOnDelete();
 
             $table->timestamps();
         });

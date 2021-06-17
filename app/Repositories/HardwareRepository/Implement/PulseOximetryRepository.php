@@ -4,7 +4,7 @@ namespace App\Repositories\HardwareRepository\Implement;
 
 use App\Models\Device\UserDevice;
 use App\Repositories\HardwareRepository\HardwareRepository;
-
+use Illuminate\Database\Eloquent\Collection;
 
 class PulseOximetryRepository implements HardwareRepository
 {
@@ -32,7 +32,7 @@ class PulseOximetryRepository implements HardwareRepository
         $userDevice = $this->userDevice::where('serial_number', $serial_number)->first();
         $data = $userDevice->pulseOximetries()->get()->all();
 
-        return $data;
+        return collect($data);
     }
 
     public function getDeviceStatus($serial_number)

@@ -20,6 +20,7 @@ class PatientDeviceController extends Controller
 
     public function savePatientDevice(Request $request)
     {
+
         try {
             $hardwareDeviceStored = $this->patientHardwareService->storeDevice($request);
 
