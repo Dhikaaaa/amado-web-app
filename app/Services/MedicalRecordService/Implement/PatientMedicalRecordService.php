@@ -29,6 +29,15 @@ class PatientMedicalRecordService implements IMedicalRecordService
 
     public function getMedicalRecord($patient_id)
     {
+        $patientRecord = $this->medicalRecordRepo->getAll($patient_id);
+        return $patientRecord;
+    }
+
+
+    public function getMonitoringResult($patient_id)
+    {
+        $monitoringResult = $this->medicalRecordRepo->getMonitoringResult($patient_id);
+        return $monitoringResult;
     }
 
 

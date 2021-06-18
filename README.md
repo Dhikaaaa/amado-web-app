@@ -76,6 +76,7 @@ Hardware yang terintegrasi ini bertugas untuk mendapatkan data saturasi oksigen 
     -   [Update Patient Location](#patient_location)
         -   [Update](#p_location_update)
 -   [Monitoring](#m_monitoring)
+    -   [Get Monitoring Result](#monitoring_result)
 -   [Rekam Medis](#rekam_medis)
 
 
@@ -870,12 +871,40 @@ Response :
 
 <!-- ============= MONITORING START ============= -->
 # <a name="m_monitoring"></a>Monitoring
+## <a name="monitoring_result"></a>Get Monitoring Result
+Request:
+-   Method: GET
+-   Endpoint: /patient/monitoring
+-   Header:
+    -   Content-Type : application/json
+-   Body:
+```json
+{
+    "patient_id" : 1
+}
+```
 
-<!-- ============= GET PULSE DATA START ============= -->
-## <a name="m_data_patient"></a>Get Pulse Data
-#### <a name="m_pasien"></a>Pasien
-
-<!-- ============= GET PULSE DATA END ============= -->
+Response: 
+-   Success
+```json
+{
+    "code": 200,
+    "status": "success",
+    "monitoring_result": {
+        "averrage_spo2": "99",
+        "status": "normal",
+        "recomendation": "tetap jaga kesehatan anda dengan patuhi protokol kesehatan"
+    }
+}
+```
+-   Failed
+```json
+{
+    "code": 400,
+    "status": "gagal",
+    "monitoring_result": "belum melakukan monitoring"
+}
+```
 <!-- ============= MONITORING END ============= -->
 
 

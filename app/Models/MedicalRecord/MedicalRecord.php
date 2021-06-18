@@ -12,6 +12,7 @@ class MedicalRecord extends Model
 
     protected $fillable = [
         'status',
+        'averrage_spo2',
         'recomendation'
     ];
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Patient\ApiForgotPasswordController;
 use App\Http\Controllers\Api\Patient\PatientProfileController;
 use App\Http\Controllers\Api\Patient\PatientDeviceController;
 use App\Http\Controllers\Api\Device\PulseOximetryController;
+use App\Http\Controllers\Api\MedicalRecord\MedicalRecordController;
 use App\Http\Controllers\Api\Monitoring\MonitoringController;
 use App\Http\Controllers\Api\Notification\NotificationPatientController;
 
@@ -42,6 +43,21 @@ Route::prefix('patient')->group(function () {
      */
     Route::get('/bio', [PatientProfileController::class, 'getBiodata']);
 
+    /**
+     * * Route medical record
+     */
+    Route::prefix('record')->group(function () {
+        Route::get('/', [MedicalRecordController::class, 'getMedicalRecord']);
+    });
+
+
+    /**
+     * * Route get monitoring result
+     */
+    Route::prefix('monitoring')->group(function () {
+        Route::get('/', [MedicalRecordController::class, 'getMonitoringResult']);
+    });
+
 
     /**
      * * Route Group Pasien
@@ -69,12 +85,6 @@ Route::prefix('patient')->group(function () {
             Route::post('/disable', [PatientDeviceController::class, 'disableDevice']);
         });
 
-
-        /**
-         * * Route manajemen data monitoring
-         */
-        Route::prefix('monitoring')->group(function () {
-        });
 
 
         /**
@@ -107,7 +117,7 @@ Route::prefix('patient')->group(function () {
         /**
          * ! This is just test route
          */
-        Route::prefix('/monitoring')->group(function () {
+        Route::prefix('/test-monitoring')->group(function () {
             Route::put('/update', [MonitoringController::class, 'testUpdateTotalMonitoring']);
         });
     });
