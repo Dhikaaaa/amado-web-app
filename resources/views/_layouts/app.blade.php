@@ -3,87 +3,89 @@
 
 <head>
 
-  @include('_includes.head')
+    @include('_includes.head')
+    @yield('head')
 
 </head>
 
 <body id="page-top">
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    <!-- Sidebar -->
-    
-    @include('_partials.sidebar')
+        <!-- Sidebar -->
 
-    <!-- End of Sidebar -->
+        @include('_partials.sidebar')
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- End of Sidebar -->
 
-      <!-- Main Content -->
-      <div id="content">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-        <!-- Topbar -->
-        
-        @include('_partials.navbar')
+            <!-- Main Content -->
+            <div id="content">
 
-        <!-- End of Topbar -->
+                <!-- Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+                @include('_partials.navbar')
 
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">@yield('title')</h1>
-          </div>
+                <!-- End of Topbar -->
 
-          @yield('content')
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@yield('title')</h1>
+                    </div>
+
+                    @yield('content')
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            @include('_partials.footer')
+            <!-- End of Footer -->
 
         </div>
-        <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      @include('_partials.footer')
-      <!-- End of Footer -->
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-  </div>
-  <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <form action="{{ route('logout') }}" method="post">
-      @csrf
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Logout dari aplikasi?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Logout dari aplikasi?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Tekan logout untuk logout</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Logout</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="modal-body">Tekan logout untuk logout</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <button class="btn btn-primary" type="submit">Logout</button>
-        </div>
-      </div>
-    </form>
     </div>
-  </div>
 
-  @include('_includes.foot')
+    @include('_includes.foot')
 
 </body>
 

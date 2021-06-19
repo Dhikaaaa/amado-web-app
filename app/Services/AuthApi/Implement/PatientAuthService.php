@@ -9,7 +9,6 @@ use App\Jobs\ProcessNotification;
 use App\Repositories\AuthApi\Implement\PatientAuthRepository;
 use App\Repositories\NotificationRepository\Implement\PatientNotificationRepository;
 use App\Services\AuthApi\AuthService;
-use App\Services\MonitoringService\Implement\PatientMonitoringService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 

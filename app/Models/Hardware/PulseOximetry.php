@@ -14,7 +14,9 @@ class PulseOximetry extends Model
 
     protected $fillable = [
         'spo2',
-        'bpm'
+        'bpm',
+        'latitude',
+        'longitude'
     ];
 
     /**

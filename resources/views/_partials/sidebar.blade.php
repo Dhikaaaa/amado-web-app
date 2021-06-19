@@ -1,48 +1,62 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-  <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-    <div class="sidebar-brand-icon d-block d-md-none">
-      {{ substr(setting('name'), 0, 3) }}
-    </div>
-    <div class="sidebar-brand-text mx-3">{{ setting('name') }}</div>
-  </a>
-
-  <!-- Divider -->
-  <hr class="sidebar-divider my-0">
-
-  <!-- Nav Item - Dashboard -->
-  <li class="nav-item {{ active('/') }}">
-
-    <a class="nav-link" href="{{ route('home') }}">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Dashboard</span></a>
-  </li>
-
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Master
-  </div>
-
-  <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item {{ active('patient', 'active', 'group') }}">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#patient" aria-expanded="true" aria-controls="patient">
-      <i class="fas fa-fw fa-stethoscope"></i>
-      <span>Pasien</span>
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon d-block d-md-none">
+            {{ substr(setting('name'), 0, 3) }}
+        </div>
+        <div class="sidebar-brand-text mx-3">{{ setting('name') }}</div>
     </a>
-    <div id="patient" class="collapse {{ active('patient', 'show', 'group') }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Master Pasien:</h6>
-        <a class="collapse-item {{ active('patient') }}" href="{{ route('patient.index') }}">Data Pasien</a>
-        <a class="collapse-item {{ active('patient/create') }}" href="{{ route('patient.create') }}">Tambah Pasien</a>
-      </div>
-    </div>
-  </li>
 
-  <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item {{ active('/') }}">
+
+        <a class="nav-link" href="{{ route('home') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Amado</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Master
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item {{ active('patient', 'active', 'group') }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#patient" aria-expanded="true"
+            aria-controls="patient">
+            <i class="fas fa-fw fa-stethoscope"></i>
+            <span>Pasien</span>
+        </a>
+        <div id="patient" class="collapse {{ active('patient', 'show', 'group') }}" aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Master Pasien:</h6>
+                <a class="collapse-item {{ active('patient') }}" href="{{ route('patient.index') }}">Data Pasien</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item {{ active('patient', 'active', 'group') }}">
+        <a class="nav-link" href="{{ route('record.index') }}">
+            <i class="fas fa-file-medical"></i>
+            <span>Rekam Medis</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    {{-- <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item {{ active('book', 'active', 'group') }}">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#book" aria-expanded="true" aria-controls="book">
       <i class="fas fa-fw fa-book"></i>
@@ -95,17 +109,17 @@
         </div>
       </div>
     </li>
-  @endcan
+  @endcan --}}
 
-  <!-- Divider -->
-  <hr class="sidebar-divider">
+    <!-- Divider -->
+    {{-- <hr class="sidebar-divider">
 
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Menu
-  </div>
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Menu
+    </div> --}}
 
-  <!-- Nav Item - Utilities Collapse Menu -->
+    {{-- <!-- Nav Item - Utilities Collapse Menu -->
   <li class="nav-item {{ active('loan', 'active', 'group') }}">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#peminjaman" aria-expanded="true" aria-controls="peminjaman">
       <i class="fas fa-fw fa-file-alt"></i>
@@ -120,24 +134,23 @@
         <a class="collapse-item {{ active('loan/return') }}" href="{{ route('loan.return') }}">Pengembalian</a>
       </div>
     </div>
-  </li>
+  </li> --}}
+    {{-- @can('isAdmin')
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ active('setting') }}">
+            <a class="nav-link collapsed" href="{{ route('setting') }}">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Pengaturan</span>
+            </a>
+        </li>
+    @endcan --}}
 
-  @can('isAdmin')
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ active('setting') }}">
-      <a class="nav-link collapsed" href="{{ route('setting') }}">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Pengaturan</span>
-      </a>
-    </li>
-  @endcan
+    <!-- Divider -->
+    {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
 
-  <!-- Divider -->
-  <hr class="sidebar-divider d-none d-md-block">
-
-  <!-- Sidebar Toggler (Sidebar) -->
-  <div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-  </div>
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
 </ul>

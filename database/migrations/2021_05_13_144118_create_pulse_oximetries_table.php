@@ -18,6 +18,8 @@ class CreatePulseOximetriesTable extends Migration
             $table->bigInteger('user_device_id')->unsigned();
             $table->string('spo2');
             $table->string('bpm');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->foreign('user_device_id')
                 ->references('id')
                 ->on('user_devices')

@@ -21,6 +21,10 @@ class PulseOximetryController extends Controller
     public function storeDataSensor(Request $request)
     {
         $this->oximetryService->storeSensorData($request);
+
+        return response()->json([
+            'message' => 'data berhasil di simpan'
+        ], 200);
     }
 
 

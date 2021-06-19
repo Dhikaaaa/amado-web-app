@@ -124,12 +124,13 @@ Route::prefix('patient')->group(function () {
 });
 
 
+
 /**
  * =============================================
  **             Route Pulse Oximetry
  * =============================================
  */
 Route::prefix('oximetry')->group(function () {
-    Route::post('/insert', [PulseOximetryController::class, 'storeDataSensor']);
+    Route::get('/insert', [PulseOximetryController::class, 'storeDataSensor']);
     Route::get('/data', [PulseOximetryController::class, 'getDataSensor']);
 });

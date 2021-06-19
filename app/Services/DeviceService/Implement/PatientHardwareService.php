@@ -5,25 +5,28 @@ namespace App\Services\DeviceService\Implement;
 use App\Repositories\DeviceRepository\Implement\PatientHardwareRepository;
 use App\Services\DeviceService\DeviceOperationService;
 use App\Services\DeviceService\DeviceService;
-use App\Services\HardwareService\HardwareService;
 use App\Services\MonitoringService\Implement\PatientMonitoringService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Repositories\MonitoringRepository\Implement\PatientMonitoringRepository;
 
 class PatientHardwareService implements DeviceService, DeviceOperationService
 {
 
     protected PatientHardwareRepository $hardwareRepository;
     protected PatientMonitoringService $monitoringService;
+    protected PatientMonitoringRepository $monitoringRepo;
 
 
     public function __construct(
         PatientHardwareRepository $hardware,
-        PatientMonitoringService $service
+        PatientMonitoringService $service,
+        PatientMonitoringRepository $monitoringRepo
     ) {
         $this->hardwareRepository = $hardware;
         $this->monitoringService = $service;
+        $this->monitoringRepo = $monitoringRepo;
     }
 
 
@@ -94,8 +97,15 @@ class PatientHardwareService implements DeviceService, DeviceOperationService
         $deviceStatus = $this->hardwareRepository->off($patientHasBeenAuthenticated->id, $request->status);
         Log::info("Disabled device for patient id {$patientHasBeenAuthenticated->id}");
 
+        $currentMonitoring = $this->monitoringRepo->get($patientHasBeenAuthenticated->id);
+
+        if ($currentMonitoring === 3) {
+            $this->monitoringService->updateTotalMonitoring($patientHasBeenAuthenticated->id, 1);
+            $this->monitoringService->resetMonitoring($patientHasBeenAuthenticated->id, 0);
+        } else {
+            $this->monitoringService->updateTotalMonitoring($patientHasBeenAuthenticated->id, 1);
+        }
         // upgrade monitoring value to + 1
-        $this->monitoringService->updateTotalMonitoring($patientHasBeenAuthenticated->id, 1);
 
         return $deviceStatus;
     }

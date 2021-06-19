@@ -2,35 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient\Patient;
-use App\Repositories\CRUDRepository\Implement\PatientRepository;
-use App\Services\CRUDService\Implement\PatientService;
-use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
+use App\Repositories\MedicalRecordRepository\Implement\PatientMedicalRecordWebRepository;
+use App\Services\MedicalRecordService\Implement\PatientMedicalRecordServiceWeb;
+use App\Services\MedicalRecordService\Implement\PatientMedicalRecordService;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
-
-class PatientController extends Controller
+class MedicalRecordController extends Controller
 {
 
     protected $service;
     protected $repo;
+    protected PatientMedicalRecordService $medicalRecord;
 
-    public function __construct(PatientService $service, PatientRepository $repo)
-    {
+    public function __construct(
+        PatientMedicalRecordServiceWeb $service,
+        PatientMedicalRecordWebRepository $repo,
+        PatientMedicalRecordService $medicalRecord
+    ) {
         $this->service = $service;
         $this->repo = $repo;
+        $this->medicalRecord = $medicalRecord;
     }
+
+
+    public function getMedicalRecord(Request $request)
+    {
+        $result = $this->medicalRecord->getMedicalRecord($request->patient_id);
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'success',
+            'patient' => $result['user'],
+            'monitoring_location' => $result['monitoring_location'],
+            'close_contacts' => $result['close_contact'],
+            'device_type' => $result['device_type'],
+            'monitoring_result' => $result['monitoring_result']
+        ]);
+    }
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
-        return view('patient.index');
+        return view('record.medical-record');
     }
 
     /**
@@ -38,9 +56,9 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
-        return view('patient.create');
+        //
     }
 
     /**
@@ -62,9 +80,11 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        $patient = $this->repo->getById($id);
+        $data = $this->medicalRecord->getMedicalRecord($id);
+        $patient = (object) $data;
+        // dd($patient);
 
-        return view('patient.show', compact('patient'));
+        return view('record.show', compact('patient'));
     }
 
     /**
@@ -75,9 +95,7 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        $patient = $this->repo->getById($id);
-
-        return view('patient.edit', compact('patient'));
+        //
     }
 
     /**
@@ -89,9 +107,7 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->service->update($id, $request);
-
-        return redirect('/patient')->with('success', 'Sukses Mengedit Data Pasien');
+        //
     }
 
     /**
@@ -100,12 +116,11 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient): JsonResponse
+    public function destroy($id)
     {
-        $patient->delete();
-
-        return response()->json('Sukses Menghapus Data Pasien');
+        //
     }
+
 
     public function datatables(): Object
     {

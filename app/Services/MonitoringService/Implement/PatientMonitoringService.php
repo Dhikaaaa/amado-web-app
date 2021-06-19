@@ -33,19 +33,25 @@ class PatientMonitoringService implements MonitoringService
 
     public function updateTotalMonitoring(int $patient_id, int $total)
     {
-        $totalCurrentMonitoring = $this->monitoringRepo->get($patient_id);
-        if ($totalCurrentMonitoring < 3) {
-            $currentUpdateMonitoring = $totalCurrentMonitoring + $total;
+        $totalBeforeMonitoring = $this->monitoringRepo->get($patient_id);
+        $totalAfterMonitoring = 0;
+
+        if ($totalBeforeMonitoring < 3) {
+
+            $currentUpdateMonitoring = $totalBeforeMonitoring + $total;
             $this->monitoringRepo->update($patient_id, $currentUpdateMonitoring);
-        } else {
-            // get patient device id
-            $serial_number = $this->getSerialNumber($patient_id);
-            // calculate sensor data
-            $resultSensor = $this->calculateAverrageData($serial_number, $this->pulseService);
-            // create patient medical record
-            $this->medicalRecordService->createMedicalRecord($patient_id, $resultSensor);
-            // roll back to 0 value, because max monitoring is 3
-            $this->monitoringRepo->update($patient_id, 0);
+            $totalAfterMonitoring = $this->monitoringRepo->get($patient_id);
+
+            if ($totalAfterMonitoring === 3) {
+                // get patient device id
+                $serial_number = $this->getSerialNumber($patient_id);
+                // calculate sensor data
+                $resultSensor = $this->calculateAverrageData($serial_number, $this->pulseService);
+                // create patient medical record
+                $this->medicalRecordService->createMedicalRecord($patient_id, $resultSensor);
+                // roll back to 0 value, because max monitoring is 3
+                $this->monitoringRepo->update($patient_id, 0);
+            }
         }
     }
 
@@ -53,6 +59,12 @@ class PatientMonitoringService implements MonitoringService
     public function initialMonitoring(int $patient_id, int $total)
     {
         $this->monitoringRepo->create($patient_id, $total);
+    }
+
+
+    public function resetMonitoring($patient_id, $reset)
+    {
+        $this->monitoringRepo->update($patient_id, $reset);
     }
 
 

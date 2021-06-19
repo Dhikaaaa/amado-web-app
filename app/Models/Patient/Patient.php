@@ -19,6 +19,8 @@ class Patient extends Model implements CanResetPassword
 
     protected $guard = 'patient';
 
+    protected $table = 'patients';
+
     protected $fillable = [
         'name',
         'email',

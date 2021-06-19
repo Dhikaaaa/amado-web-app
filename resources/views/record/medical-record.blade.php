@@ -15,8 +15,7 @@
 
     <div class="card shadow">
         <div class="card-header py-2 d-flex justify-content-between align-items-center">
-            <h2 class="h6 m-0 font-weight-bold text-primary">Data Pasien</h2>
-            <a href="{{ route('patient.create') }}" class="btn btn-sm btn-primary shadow">Tambah Pasien</a>
+            <h2 class="h6 m-0 font-weight-bold text-primary">Rekam Medis</h2>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -24,10 +23,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>No Telepon</th>
-                            <th>Alamat</th>
+                            <th>Nama Pasien</th>
+                            <th>Nilai Spo2</th>
+                            <th>Status Pasien</th>
+                            <th>Terakhir Diperbaharui</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -47,11 +46,11 @@
     <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <script>
-        const ajaxUrl = '{{ route('patient.datatables') }}'
-        const deleteUrl = '{{ route('patient.destroy', ':id') }}'
+        const ajaxUrl = '{{ route('record.datatables') }}'
+        const deleteUrl = '{{ route('record.destroy', ':id') }}'
         const csrf = '{{ csrf_token() }}'
 
     </script>
 
-    <script src="{{ asset('js/patient.js') }}"></script>
+    <script src="{{ asset('js/record.js') }}"></script>
 @endpush

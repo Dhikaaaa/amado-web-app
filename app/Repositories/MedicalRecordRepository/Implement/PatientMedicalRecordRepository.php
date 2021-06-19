@@ -61,10 +61,7 @@ class PatientMedicalRecordRepository implements IMedicalRecordRepository
             'status' => $status,
             'recomendation' => $recomendation
         ]);
-
-        return $patient->medicalRecord()->fresh();
     }
-
 
 
     public function update($patient_id)
