@@ -28,6 +28,21 @@
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item {{ active('patient', 'active', 'group') }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#patient" aria-expanded="true" aria-controls="patient">
+      <i class="fas fa-fw fa-stethoscope"></i>
+      <span>Pasien</span>
+    </a>
+    <div id="patient" class="collapse {{ active('patient', 'show', 'group') }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Master Pasien:</h6>
+        <a class="collapse-item {{ active('patient') }}" href="{{ route('patient.index') }}">Data Pasien</a>
+        <a class="collapse-item {{ active('patient/create') }}" href="{{ route('patient.create') }}">Tambah Pasien</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item {{ active('book', 'active', 'group') }}">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#book" aria-expanded="true" aria-controls="book">
       <i class="fas fa-fw fa-book"></i>
