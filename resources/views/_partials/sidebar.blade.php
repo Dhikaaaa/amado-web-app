@@ -28,7 +28,7 @@
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
-  <li class="nav-item {{ active('patient', 'active', 'group') }}">
+  {{-- <li class="nav-item {{ active('patient', 'active', 'group') }}">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#patient" aria-expanded="true" aria-controls="patient">
       <i class="fas fa-fw fa-stethoscope"></i>
       <span>Pasien</span>
@@ -40,6 +40,22 @@
         <a class="collapse-item {{ active('patient/create') }}" href="{{ route('patient.create') }}">Tambah Pasien</a>
       </div>
     </div>
+  </li> --}}
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item {{ active('patient') }}">
+    <a class="nav-link collapsed" href="{{ route('patient.index') }}">
+      <i class="fas fa-fw fa-stethoscope"></i>
+      <span>Data Pasien</span>
+    </a>
+  </li>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item {{ active('lokasi') }}">
+    <a class="nav-link collapsed" href="{{ route('lokasi.index') }}">
+      <i class="fas fa-fw fa-map-marker-alt"></i>
+      <span>Lokasi</span>
+    </a>
   </li>
 
   <!-- Nav Item - Pages Collapse Menu -->

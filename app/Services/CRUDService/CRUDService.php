@@ -9,4 +9,5 @@ interface CRUDService
     function update(int $id, object $request);
     function upload(object $file);
     function getDataTables();
+    function getLokasi();
 }

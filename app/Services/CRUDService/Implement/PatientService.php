@@ -69,4 +69,20 @@ class PatientService implements CRUDService
 
 		return $datatables;
 	}
+
+    public function getLokasi()
+    {
+        $result = [];
+
+        $lokasi = $this->patientRepository->get();
+        foreach ($lokasi as $value) {
+            array_push($result, [
+                'nama' => $value->name,
+                'alamat' => $value->alamat,
+                'longitude' => $value->longitude,
+                'latitude' => $value->latitude
+            ]);
+        }
+        return $result;
+    }
 }
