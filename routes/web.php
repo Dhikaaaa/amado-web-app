@@ -8,6 +8,7 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RackController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,11 @@ Route::middleware('auth')->group(function () {
 		Route::post('/search', [BookController::class, 'search'])->name('search');
 	});
 
+	Route::prefix('patient')->name('patient.')->group(function () {
+		Route::post('/datatables', [PatientController::class, 'datatables'])->name('datatables');
+		Route::post('/search', [PatientController::class, 'search'])->name('search');
+	});
+
 	Route::prefix('member')->name('member.')->group(function () {
 		Route::post('/datatables', [MemberController::class, 'datatables'])->name('datatables');
 		Route::post('/search', [MemberController::class, 'search'])->name('search');
@@ -54,6 +60,7 @@ Route::middleware('auth')->group(function () {
 	});
 
 	Route::resource('book', BookController::class);
+	Route::resource('patient', PatientController::class);
 	Route::resource('member', MemberController::class, ['except' => ['show']]);
 	Route::resource('user', UserController::class, ['except' => ['show']])->middleware('can:isAdmin');
 	Route::resource('loan', LoanController::class, ['except' => ['show', 'edit', 'update']]);
