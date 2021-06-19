@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\Patient\ApiForgotPasswordController;
 use App\Http\Controllers\Api\Patient\PatientProfileController;
 use App\Http\Controllers\Api\Patient\PatientDeviceController;
 use App\Http\Controllers\Api\Device\PulseOximetryController;
+use App\Http\Controllers\Api\MedicalRecord\MedicalRecordController;
+use App\Http\Controllers\Api\Monitoring\MonitoringController;
 use App\Http\Controllers\Api\Notification\NotificationPatientController;
 
 /*
@@ -36,11 +38,25 @@ Route::prefix('patient')->group(function () {
     Route::post('/forgot-password', [ApiForgotPasswordController::class, 'forgotPassword']);
     Route::post('/reset-password', [ApiForgotPasswordController::class, 'resetPassword']);
 
-
     /**
      * * Route get biodata Pasien
      */
     Route::get('/bio', [PatientProfileController::class, 'getBiodata']);
+
+    /**
+     * * Route medical record
+     */
+    Route::prefix('record')->group(function () {
+        Route::get('/', [MedicalRecordController::class, 'getMedicalRecord']);
+    });
+
+
+    /**
+     * * Route get monitoring result
+     */
+    Route::prefix('monitoring')->group(function () {
+        Route::get('/', [MedicalRecordController::class, 'getMonitoringResult']);
+    });
 
 
     /**
@@ -52,6 +68,8 @@ Route::prefix('patient')->group(function () {
          * * Route biodata pasien
          */
         Route::post('/update', [PatientProfileController::class, 'update']);
+        // ! update geolokasi sementara
+        Route::post('/geo-update', [PatientProfileController::class, 'updatePatientLocation']);
 
         // TODO : Perlu perbaikan, data terlalu besar belum dioptimalkan
         Route::post('/add-profile-photo', [PatientProfileController::class, 'saveUserProfile']);
@@ -67,12 +85,6 @@ Route::prefix('patient')->group(function () {
             Route::post('/disable', [PatientDeviceController::class, 'disableDevice']);
         });
 
-
-        /**
-         * * Route manajemen data monitoring
-         */
-        Route::prefix('monitoring')->group(function () {
-        });
 
 
         /**
@@ -99,6 +111,14 @@ Route::prefix('patient')->group(function () {
          */
         Route::prefix('kontak')->group(function () {
             Route::post('/insert', [CloseContactController::class, 'storeCloseContact']);
+        });
+
+
+        /**
+         * ! This is just test route
+         */
+        Route::prefix('/test-monitoring')->group(function () {
+            Route::put('/update', [MonitoringController::class, 'testUpdateTotalMonitoring']);
         });
     });
 });

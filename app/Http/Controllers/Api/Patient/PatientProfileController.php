@@ -18,6 +18,27 @@ class PatientProfileController extends Controller
     }
 
 
+    public function updatePatientLocation(Request $request)
+    {
+        try {
+            $currentLocation = $this->patientService->updateGeolocation($request);
+            if ($currentLocation) {
+                return response()->json([
+                    'code' => 200,
+                    'message' => 'success',
+                    'latitude' => $currentLocation->latitude,
+                    'longitude' => $currentLocation->longitude
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'code' => 400,
+                'status' => 'failed',
+                'message' => 'update location failed'
+            ]);
+        }
+    }
+
 
     public function update(Request $request)
     {

@@ -4,6 +4,7 @@ namespace App\Services\UserService\Implement;
 
 use App\Repositories\UserRepository\Implement\PatientRepository;
 use App\Services\UserService\UserService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,12 +35,33 @@ class PatientService implements UserService
         }
 
         $patientUpdateData = collect($request);
-
         $patientHasBeenAuthenticated = Auth::guard('patientapi')->user();
 
         $patientUpdated = $this->patientRepository->saveUpdateUser($patientHasBeenAuthenticated, $patientUpdateData);
-
         return $patientUpdated;
+    }
+
+
+    /**
+     * ! Sementara untuk update geolokasi, nanti akan direfaktor menjadi service geolokasi
+     */
+    public function updateGeolocation(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'latitude' => 'required',
+            'longitude' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return;
+        }
+
+        $patientHasBeenAuthenticated = Auth::guard('patientapi')->user();
+        $coordinate = $request->only(['latitude', 'longitude']);
+
+        $geolocationUpdated = $this->patientRepository->updateGeolocation($patientHasBeenAuthenticated->id, $coordinate);
+
+        return $geolocationUpdated;
     }
 
 

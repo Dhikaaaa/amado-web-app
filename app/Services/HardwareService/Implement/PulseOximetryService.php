@@ -18,11 +18,13 @@ class PulseOximetryService implements HardwareService
     protected $repositoryOximeter;
     protected $userDevice;
 
+
     public function __construct(PulseOximetryRepository $repo, UserDevice $device)
     {
         $this->repositoryOximeter = $repo;
         $this->userDevice = $device;
     }
+
 
     public function storeSensorData(Request $data)
     {
@@ -42,13 +44,13 @@ class PulseOximetryService implements HardwareService
         return;
     }
 
-    public function getSensorData(Request $request)
+    public function getSensorData($serial_number)
     {
         // cek apakah device ada
-        $isDeviceExist = $this->repositoryOximeter->getDevice($request->serial_number);
+        $isDeviceExist = $this->repositoryOximeter->getDevice($serial_number);
 
         if ($isDeviceExist) {
-            $sensorData = $this->repositoryOximeter->getMeasurements($request->serial_number);
+            $sensorData = $this->repositoryOximeter->getMeasurements($serial_number);
             return $sensorData;
         }
 

@@ -60,6 +60,22 @@ class PatientRepository implements UserRepository
     }
 
 
+    /**
+     * ! Sementara untuk update geolokasi, nanti akan direfaktof menjadi service geolokasi
+     */
+    public function updateGeolocation($patient_id, $coordinate)
+    {
+
+        $coordinateUpdated = $this->patientModel::find($patient_id);
+        $coordinateUpdated->update([
+            'latitude' => $coordinate['latitude'],
+            'longitude' => $coordinate['longitude']
+        ]);
+
+        return $coordinateUpdated->fresh();
+    }
+
+
     public function getPhotoProfile($user_id)
     {
         $filePath = $this->patientModel::find($user_id)->photo;

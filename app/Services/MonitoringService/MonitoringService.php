@@ -4,6 +4,8 @@ namespace App\Services\MonitoringService;
 
 use Illuminate\Http\Request;
 
-interface MonitoringService{
-    public function getSensorData(Request $data);
+interface MonitoringService
+{
+    function updateTotalMonitoring(int $patient_id, int $total);
+    function initialMonitoring(int $patient_id, int $total);
 }

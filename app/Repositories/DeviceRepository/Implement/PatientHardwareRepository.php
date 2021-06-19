@@ -27,6 +27,18 @@ class PatientHardwareRepository implements
     }
 
 
+    public function getSerialNumber($patient_id)
+    {
+        return Patient::find($patient_id)->userDevice()->first()->serial_number;
+    }
+
+
+    public function getUserDeviceId($patient_id)
+    {
+        return Patient::find($patient_id)->userDevice()->first()->id;
+    }
+
+
     public function updateDevice()
     {
         // TODO : Update Device
