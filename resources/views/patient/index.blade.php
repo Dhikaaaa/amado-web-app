@@ -49,7 +49,6 @@
 	<script>
 		const ajaxUrl = '{{ route('patient.datatables') }}'
 		const deleteUrl = '{{ route('patient.destroy', ':id') }}'
-		const csrf = '{{ csrf_token() }}'
 	</script>
 
 	<script src="{{ asset('js/patient.js') }}"></script>
