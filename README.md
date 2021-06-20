@@ -69,7 +69,9 @@ Hardware yang terintegrasi ini bertugas untuk mendapatkan data saturasi oksigen 
         -   [Pasien](#dm_pasien)
     -   [Enable/Disable Device](#en_device)
         -   [Pasien](#en_pasien)
--   [Kotak Erat](#kontak_erat)
+    -   [Get Serial Number](#en_device_serial)
+        -   [Pasien](#en_serial)
+-   [Kontak Erat](#kontak_erat)
     -   [Isi form kontak erat](#kontak_form)
         -   [Insert](#kontak_erat_insert)
 -   [Geolokasi](#geolokasi)
@@ -832,15 +834,15 @@ Response:
 ## <a name="en_device"></a>Enable/Disable Device
 ### <a name="en_pasien"></a>Pasien
 -   Method: POST
--   Endpoint: 'patient/device/enable' (menyalakan perangkat)
--   Endpoint: 'patient/device/disable' (mematikan perangkat)
+-   Endpoint: 'patient/hardware/enable' (menyalakan perangkat = 1)
+-   Endpoint: 'patient/hardware/disable' (mematikan perangkat = 0)
 -   Header: 
     -   Content-Type : application/json
     -   Authorization : Bearer
 -   Body:
 ```json
 {
-    "status" : "on/off",
+    "status" : "0/1",
 }
 ```
 
@@ -864,6 +866,41 @@ Response :
 ```
 
 <!-- ============= ENABLE/DISABLE END ============= -->
+<!-- ============= DEVICE END ============= -->
+
+
+
+
+<!-- ============= ENABLE/DISABLE START ============= -->
+## <a name="en_device_serial"></a>Enable/Get Serial Number
+### <a name="en_serial"></a>Pasien
+-   Method: POST
+-   Endpoint: 'patient/hardware/serial-number'
+-   Header: 
+    -   Content-Type : application/json
+    -   Authorization : Bearer
+-   Body:
+
+Response :
+-   Success:
+```json
+{
+    "code" : 200,
+    "status" : "berhasil",
+    "serial_number" : "serial number device"
+}
+```
+
+-   Failed :
+```json
+{
+    "code" : 400,
+    "status" : "gagal",
+    "message" : "belum terdaftar"
+}
+```
+
+<!-- ============= GET SERIAL NUMBER END ============= -->
 <!-- ============= DEVICE END ============= -->
 
 

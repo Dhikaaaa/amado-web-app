@@ -39,6 +39,25 @@ class PatientDeviceController extends Controller
         }
     }
 
+    public function getSerialNmber(Request $request)
+    {
+        $serialNumber = $this->patientHardwareService->getSerialNumber($request);
+
+        if ($serialNumber !== "") {
+            return response()->json([
+                'code' => 200,
+                'status' => 'berhasil',
+                'serial_number' => $serialNumber,
+            ]);
+        }
+
+        return response()->json([
+            'code' => 400,
+            'status' => 'gagal',
+            'message' => 'device belum terdaftar',
+        ]);
+    }
+
     public function enableDevice(Request $request)
     {
 

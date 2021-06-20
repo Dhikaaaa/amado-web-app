@@ -83,6 +83,7 @@ Route::prefix('patient')->group(function () {
             Route::post('/create', [PatientDeviceController::class, 'savePatientDevice']);
             Route::post('/enable', [PatientDeviceController::class, 'enableDevice']);
             Route::post('/disable', [PatientDeviceController::class, 'disableDevice']);
+            Route::post('/serial-number', [PatientDeviceController::class, 'getSerialNmber']);
         });
 
 

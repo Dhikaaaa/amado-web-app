@@ -9,6 +9,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\LokasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,15 @@ Route::middleware('auth')->group(function () {
 		Route::post('/search', [MedicalRecordController::class, 'search'])->name('search');
 	});
 
+	// Route::prefix('lokasi')->name('lokasi.')->group(function () {
+	// 	Route::post('/pasien', [LokasiController::class, 'show'])->name('show');
+	// });
+
+	Route::prefix('member')->name('member.')->group(function () {
+		Route::post('/datatables', [MemberController::class, 'datatables'])->name('datatables');
+		Route::post('/search', [MemberController::class, 'search'])->name('search');
+	});
+
 	// Route::prefix('monitoring')->group(function () {
 	// 	Route::get('/', [MedicalRecordController::class, 'getMonitoringResult']);
 	// });
@@ -71,6 +81,7 @@ Route::middleware('auth')->group(function () {
 	Route::resource('book', BookController::class);
 	Route::resource('patient', PatientController::class);
 	Route::resource('record', MedicalRecordController::class);
+	Route::resource('lokasi', LokasiController::class);
 	Route::resource('member', MemberController::class, ['except' => ['show']]);
 	Route::resource('user', UserController::class, ['except' => ['show']])->middleware('can:isAdmin');
 	Route::resource('loan', LoanController::class, ['except' => ['show', 'edit', 'update']]);
