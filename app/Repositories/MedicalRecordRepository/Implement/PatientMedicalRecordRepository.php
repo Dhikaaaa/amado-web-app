@@ -44,6 +44,28 @@ class PatientMedicalRecordRepository implements IMedicalRecordRepository
     }
 
 
+    public function getAllPatient($patient_id): array
+    {
+        $patient = $this->patient::find($patient_id);
+
+        $patientData = collect($patient)->only(['id', 'name', 'phone', 'email', 'jenis_kelamin', 'tanggal_lahir', 'alamat'])->toArray();
+        $patientMonitoringLocation = collect($patient)->only(['latitude', 'longitude'])->toArray();
+        $patientCloseContact = $patient->closeContacts()->get()->toArray();
+        $patientDeviceId = $patient->userDevice()->get()->pluck('device_id')->toArray()[0];
+        $patientDeviceType = $this->device::find($patientDeviceId)->name;
+        $patientMedicalRecord = $this->getMonitoringResult($patient_id);
+
+        $patientRecord = array(
+            $patientData,
+            $patientMonitoringLocation,
+            $patientCloseContact,
+            $patientDeviceType,
+            $patientMedicalRecord
+        );
+
+        return $patientRecord;
+    }
+
 
     public function getMonitoringResult($patient_id): array
     {

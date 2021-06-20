@@ -26,32 +26,33 @@
                         <div class="col-sm">
                             <img src="{{ asset('storage/profiles/profile.jpg') }}" style="width: 300px;" alt="">
                         </div>
+
                         <div class="col-sm">
                             <h2 class="h4 mb-2 font-weight-bold text-primary">Biodata</h2>
                             <div class="row">
                                 <dt class="col-4">Nama</dt>
                                 <dd class="col">:</dd>
-                                <dd class="col-7">{{ $patient->user['name'] }}</dd>
+                                <dd class="col-7">{{ $patient[0]['name'] }}</dd>
 
                                 <dt class="col-4">Jenis Kelamin</dt>
                                 <dd class="col">:</dd>
-                                <dd class="col-7">{{ $patient->user['jenis_kelamin'] }}</dd>
+                                <dd class="col-7">{{ $patient[0]['jenis_kelamin'] }}</dd>
 
                                 <dt class="col-4">No. Telp</dt>
                                 <dd class="col-1">:</dd>
-                                <dd class="col-7">{{ $patient->user['phone'] }}</dd>
+                                <dd class="col-7">{{ $patient[0]['phone'] }}</dd>
 
                                 <dt class="col-4">Email</dt>
                                 <dd class="col-1">:</dd>
-                                <dd class="col-7">{{ $patient->user['email'] }}</dd>
+                                <dd class="col-7">{{ $patient[0]['email'] }}</dd>
 
                                 <dt class="col-4">Tanggal Lahir</dt>
                                 <dd class="col-1">:</dd>
-                                <dd class="col-7">{{ $patient->user['tanggal_lahir'] }}</dd>
+                                <dd class="col-7">{{ $patient[0]['tanggal_lahir'] }}</dd>
 
                                 <dt class="col-4">Alamat</dt>
                                 <dd class="col-1">:</dd>
-                                <dd class="col-7">{{ $patient->user['alamat'] }}</dd>
+                                <dd class="col-7">{{ $patient[0]['alamat'] }}</dd>
                             </div>
                         </div>
                         <div class="col-sm">
@@ -60,25 +61,25 @@
                                 <dt class="col-4">Lokasi</dt>
                                 <dd class="col">:</dd>
                                 <dd class="col-7">
-                                    {{ $patient->monitoring_location['latitude'] }}
+                                    {{ $patient[1]['latitude'] }}
                                 </dd>
                                 <dt class="col-4"></dt>
                                 <dd class="col"></dd>
                                 <dd class="col-7">
-                                    {{ $patient->monitoring_location['longitude'] }}
+                                    {{ $patient[1]['longitude'] }}
                                 </dd>
 
                                 <dt class="col-4">Perangkat</dt>
                                 <dd class="col">:</dd>
-                                <dd class="col-7">{{ $patient->device_type }}</dd>
+                                <dd class="col-7">{{ $patient[3] }}</dd>
 
                                 <dt class="col-4">Spo2</dt>
                                 <dd class="col">:</dd>
-                                <dd class="col-7">{{ $patient->monitoring_result['averrage_spo2'] }}</dd>
+                                <dd class="col-7">{{ $patient[4]['averrage_spo2'] }}</dd>
 
                                 <dt class="col-4">Status</dt>
                                 <dd class="col">:</dd>
-                                <dd class="col-7">{{ $patient->monitoring_result['status'] }}</dd>
+                                <dd class="col-7">{{ $patient[4]['status'] }}</dd>
                             </div>
                         </div>
                     </div>
@@ -102,104 +103,75 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        //Begin geocoding
-        const lat = '-8.455762646839869';
-        const long = '114.26299020120373';
 
-        // let test = {{ json_encode($patient->close_contact[0]) }};
-        // let parse = JSON.parse(test.replace(/&quot;/, '"'));
-        // console.log(parse);
+    <script type="text/javascript">
+        let closeContact = @json($patient[2]);
+        let latPatient = @json($patient[1]['latitude']);
+        let lonPatient = @json($patient[1]['longitude']);
 
 
         // init api key
         const platform = new H.service.Platform({
             apikey: 'X5wdPPV7YALJd-lJEmbgp8evwHrMBrDYpk7WrX1G7bs'
         });
-        // instance seaarch service
-        const service = platform.getSearchService();
+
+        function addMarkerToGroup(group, coordinate, html) {
+            let marker = new H.map.Marker(coordinate);
+            // add custom data to the marker
+            marker.setData(html);
+            group.addObject(marker);
+        }
+
+        function addInfoBubble(map, latitude, longitude, nama, alamat, tanggal) {
+            let group = new H.map.Group();
+
+            map.addObject(group);
+
+            // add 'tap' event listener, that opens info bubble, to the group
+            group.addEventListener('tap', function(evt) {
+                // event target is the marker itself, group is a parent event target
+                // for all objects that it contains
+                let bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+                    // read custom data
+                    content: evt.target.getData()
+                });
+                // show info bubble
+                ui.addBubble(bubble);
+            }, false);
+
+            addMarkerToGroup(group, {
+                    lat: latitude,
+                    lng: longitude
+                },
+
+                '<div>' + nama + '</div> <hr>' +
+                '<div>' + alamat + '</div> <hr>' +
+                '<div>' + tanggal + '</div>');
+        }
 
         const defaultLayers = platform.createDefaultLayers();
+
         const map = new H.Map(document.getElementById('map'),
             defaultLayers.vector.normal.map, {
                 center: {
-                    lat: lat,
-                    lng: long
+                    lat: latPatient,
+                    lng: lonPatient
                 },
                 zoom: 12,
                 pixelRatio: window.devicePixelRatio || 1
             });
 
-        // Create a marker icon from an image URL:
-        var icon = new H.map.Icon('https://i.ibb.co/Yjwq79f/contacts-512.png');
-
-        // resize event maps
         window.addEventListener('resize', () => map.getViewPort().resize());
-        // behavior
+
         const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
-        //set default ui
         const ui = H.ui.UI.createDefault(map, defaultLayers);
 
-
-        // Call the reverse geocode method with the geocoding parameters,
-        // the callback and an error callback function (called if a
-        // communication error occurs):
-        service.reverseGeocode({
-            at: `${lat},${long}`
-        }, (result) => {
-            result.items.forEach((item) => {
-                // Assumption: ui is instantiated
-                // Create an InfoBubble at the returned location with
-                // the address as its contents:
-                ui.addBubble(new H.ui.InfoBubble(item.position, {
-                    content: item.address.label
-                }));
-            });
-        }, alert);
-
-
-        // set zoom tools
-        var mapSettings = ui.getControl('mapsettings');
-        var zoom = ui.getControl('zoom');
-        var scalebar = ui.getControl('scalebar');
-        mapSettings.setAlignment('top-left');
-        zoom.setAlignment('top-left');
-        scalebar.setAlignment('top-left');
-
-        service.reverseGeocode({
-            at: lat + ',' + long
-        }, (result) => {
-            result.items.forEach((item) => {
-                map.addObject(new H.map.Marker(item.position));
-            });
-        }, alert);
-
-
-        window.onload = function() {
-            addMarkersToMap(map);
-        }
-
-
-        function addMarkersToMap(map) {
-            var romeMarker = new H.map.Marker({
-                lat: -8.397131138390339,
-                lng: 114.27665545941093
-            });
-            map.addObject(romeMarker);
-
-            var berlinMarker = new H.map.Marker({
-                lat: -8.320451050603433,
-                lng: 114.28788258711977
-            });
-            map.addObject(berlinMarker);
-
-            var madridMarker = new H.map.Marker({
-                lat: -8.43762384076669,
-                lng: 114.32653985633021
-            });
-            map.addObject(madridMarker);
-        }
+        closeContact.forEach(element => {
+            addInfoBubble(map, element['latitude'], element['longitude'], element['name'], element['address'],
+                element['date']
+            );
+        });
 
     </script>
 

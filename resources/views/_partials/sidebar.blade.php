@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon d-block d-md-none">
             {{ substr(setting('name'), 0, 3) }}
         </div>
-        <div class="sidebar-brand-text mx-3">{{ setting('name') }}</div>
+        <div class="sidebar-brand-text mx-3">Amado Dashboard</div>
     </a>
 
     <!-- Divider -->
@@ -24,16 +24,16 @@
 
 
     <!-- Nav Item - Pages Collapse Menu -->
-    {{-- <li class="nav-item {{ active('patient') }}">
+    <li class="nav-item {{ active('patient') }}">
         <a class="nav-link collapsed" href="{{ route('patient.index') }}">
             <i class="fas fa-fw fa-stethoscope"></i>
             <span>Data Pasien</span>
         </a>
-    </li> --}}
+    </li>
 
     <li class="nav-item {{ active('record') }}">
         <a class="nav-link collapsed" href="{{ route('record.index') }}">
-            <i class="fas fa-file-medical"></i>
+            <i class="fas fa-fw fa-notes-medical"></i>
             <span>Rekam Medis</span>
         </a>
     </li>
@@ -42,7 +42,7 @@
     <li class="nav-item {{ active('lokasi') }}">
         <a class="nav-link collapsed" href="{{ route('lokasi.index') }}">
             <i class="fas fa-fw fa-map-marker-alt"></i>
-            <span>Lokasi</span>
+            <span>Lokasi Pasien</span>
         </a>
     </li>
 

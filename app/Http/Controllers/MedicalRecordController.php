@@ -80,9 +80,7 @@ class MedicalRecordController extends Controller
      */
     public function show($id)
     {
-        $data = $this->medicalRecord->getMedicalRecord($id);
-        $patient = (object) $data;
-        // dd($patient);
+        $patient = $this->medicalRecord->getMedicalRecord($id);
 
         return view('record.show', compact('patient'));
     }

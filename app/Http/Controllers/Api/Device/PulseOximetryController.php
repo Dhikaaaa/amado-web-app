@@ -42,7 +42,7 @@ class PulseOximetryController extends Controller
         return response()->json([
             'code' => 400,
             'status' => 'gagal',
-            'message' => 'Device tidak terdaftar'
+            'message' => 'Data kosong'
         ]);
     }
 }

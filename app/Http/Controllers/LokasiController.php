@@ -16,7 +16,6 @@ class LokasiController extends Controller
     {
         $this->service = $service;
         $this->repo = $repo;
-
     }
 
     /**
@@ -29,9 +28,7 @@ class LokasiController extends Controller
         // $lokasi = $this->repo->get();
         // dd($lokasi);
         $lokasi = $this->service->getLokasi();
+
         return view('lokasi.index', compact('lokasi'));
     }
-
-
-
 }

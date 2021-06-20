@@ -27,23 +27,18 @@ class PatientMedicalRecordService implements IMedicalRecordService
     }
 
 
+    // public function getMedicalRecord($patient_id)
+    // {
+    //     $patientRecord = $this->medicalRecordRepo->getAll($patient_id);
+    //     return $patientRecord;
+    // }
+
+
     public function getMedicalRecord($patient_id)
     {
-        $patientRecord = $this->medicalRecordRepo->getAll($patient_id);
-        return $patientRecord;
-    }
+        $closeContacts = $this->medicalRecordRepo->getAllPatient($patient_id);
 
-
-    public function getMedicalRecordJson($patient_id)
-    {
-        $result = $this->medicalRecordRepo->getAll($patient_id);
-        return response()->json([
-            'patient' => $result['user'],
-            'monitoring_location' => $result['monitoring_location'],
-            'close_contacts' => $result['close_contact'],
-            'device_type' => $result['device_type'],
-            'monitoring_result' => $result['monitoring_result']
-        ]);
+        return $closeContacts;
     }
 
 

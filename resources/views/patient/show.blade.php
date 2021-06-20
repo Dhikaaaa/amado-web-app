@@ -13,7 +13,7 @@
                 <div class="card-body d-flex">
                     <div class="col-lg-3 mb-4">
                         {{-- <img src="{{ $patient->photo }}" class="img-fluid rounded"> --}}
-                        <img src="{{ asset('default.png') }}" class="img-fluid rounded" alt="">
+                        <img src="{{ asset('storage/profiles/profile.jpg') }}" class="img-fluid rounded" alt="">
                     </div>
                     <div class="col-lg-9 mb-2">
                         <div class="row">

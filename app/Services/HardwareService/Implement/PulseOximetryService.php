@@ -51,6 +51,9 @@ class PulseOximetryService implements HardwareService
 
         if ($isDeviceExist) {
             $sensorData = $this->repositoryOximeter->getMeasurements($serial_number);
+            if (count($sensorData) == 0) {
+                return false;
+            }
             return $sensorData;
         }
 
