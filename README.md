@@ -261,6 +261,7 @@ Request :
 {
     "nama": "nama_pasien",
     "jenis_kelamin": "jenis_kelamin_pasien",
+    "nik": "nik pasien",
     "alamat": "alamat_pasien",
     "tanggal_lahir": "tanggal_lahir_pasien",
     "phone": "nomor_telepon_pasien"
@@ -280,6 +281,7 @@ Response :
         "id": 1,
         "name": "nama_paisen",
         "email": "email_pasien",
+        "nik" : "nik pasien",
         "jenis_kelamin": "jenis_kelamin_pasien",
         "alamat": "alamat_pasien",
         "tangggal_lahir": "tanggal_lahir_pasien",
@@ -416,6 +418,7 @@ Response:
         "id": 1,
         "name": "nama_paisen",
         "email": "email_pasien",
+        "nik": "nik pasien",
         "jenis_kelamin": "jenis_kelamin_pasien",
         "alamat": "alamat_pasien",
         "tangggal_lahir": "tanggal_lahir_pasien",

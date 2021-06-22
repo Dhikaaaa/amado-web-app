@@ -24,6 +24,7 @@ class Patient extends Model implements CanResetPassword
     protected $fillable = [
         'name',
         'email',
+        'nik',
         'password',
         'phone',
         'photo',

@@ -25,7 +25,7 @@ class PatientMedicalRecordRepository implements IMedicalRecordRepository
     {
         $patient = $this->patient::find($patient_id);
 
-        $patientData = collect($patient)->only(['id', 'name', 'phone', 'email', 'jenis_kelamin', 'tanggal_lahir', 'alamat'])->toArray();
+        $patientData = collect($patient)->only(['id', 'name', 'photo', 'phone', 'email', 'jenis_kelamin', 'tanggal_lahir', 'alamat'])->toArray();
         $patientMonitoringLocation = collect($patient)->only(['latitude', 'longitude'])->toArray();
         $patientCloseContact = $patient->closeContacts()->get()->toArray();
         $patientDeviceId = $patient->userDevice()->get()->pluck('device_id')->toArray()[0];
@@ -48,7 +48,7 @@ class PatientMedicalRecordRepository implements IMedicalRecordRepository
     {
         $patient = $this->patient::find($patient_id);
 
-        $patientData = collect($patient)->only(['id', 'name', 'phone', 'email', 'jenis_kelamin', 'tanggal_lahir', 'alamat'])->toArray();
+        $patientData = collect($patient)->only(['id', 'name', 'photo', 'phone', 'email', 'jenis_kelamin', 'tanggal_lahir', 'alamat'])->toArray();
         $patientMonitoringLocation = collect($patient)->only(['latitude', 'longitude'])->toArray();
         $patientCloseContact = $patient->closeContacts()->get()->toArray();
         $patientDeviceId = $patient->userDevice()->get()->pluck('device_id')->toArray()[0];

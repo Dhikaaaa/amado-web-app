@@ -82,6 +82,7 @@ class MedicalRecordController extends Controller
     {
         $patient = $this->medicalRecord->getMedicalRecord($id);
 
+
         return view('record.show', compact('patient'));
     }
 

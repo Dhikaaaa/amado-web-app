@@ -25,6 +25,7 @@ class PatientRepository implements UserRepository
         $this->patientModel::find($idPatient)
             ->update([
                 'name' => $newData['name'],
+                'nik' => $newData['nik'],
                 'jenis_kelamin' => $newData['jenis_kelamin'],
                 'tanggal_lahir' => $newData['tanggal_lahir'],
                 'phone' => $newData['phone'],
@@ -45,7 +46,7 @@ class PatientRepository implements UserRepository
         $imageName = time() . '.' . 'png';
 
         // $path = Storage::putFile('public/profiles', $imageName);
-        $path = "public/profiles/$imageName";
+        $path = "profiles/$imageName";
 
         Storage::disk('public-image')->put($imageName, $photo);
 

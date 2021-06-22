@@ -59,7 +59,6 @@ class PatientMedicalRecordServiceWeb implements IMedicalRecordServiceWeb
             ->addColumn('detail', function ($record) {
                 return '
 							<a href="' . route('record.show', $record->id) . '" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></a>
-							<button class="btn btn-sm btn-primary download"><i class="fas fa-print"></i></button>
 						';
             })
             ->rawColumns(['detail'])

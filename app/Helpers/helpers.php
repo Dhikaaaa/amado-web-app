@@ -13,11 +13,12 @@ function convertImageToBase64($fileName)
 	// explode file name
 	$path = explode('/', $fileName);
 	// ambil index terakhir (nama file)
-	$imageName = $path[2];
+	$imageName = $path[1];
 	// cari tahu format file
 	$fileType = pathinfo($imageName, PATHINFO_EXTENSION);
 	// ambil data gambar
-	$data = Storage::get($fileName);
+	$data = Storage::get("public/" . $fileName);
+
 	// encode data
 	$encodeData = base64_encode($data);
 

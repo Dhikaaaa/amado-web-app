@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm">
-                            <img src="{{ asset('storage/profiles/profile.jpg') }}" style="width: 300px;" alt="">
+                            <img src="{{ asset('storage/' . $patient[0]['photo']) }}" style="width: 300px;" alt="">
                         </div>
 
                         <div class="col-sm">

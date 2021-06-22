@@ -24,6 +24,7 @@ class PatientService implements UserService
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'nik' => 'required',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required',
             'phone' => 'required',
